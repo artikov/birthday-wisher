@@ -21,12 +21,12 @@ data_dict = data.to_dict(orient='records')
 # -------------------- Function to send email ----------------------- #
 
 
-def send_email(letter_to_send):
+def send_email(letter_to_send, recipient_email):
     with smtplib.SMTP_SSL(host='smtp.gmail.com') as connection:
         connection.login(user=my_email, password=password)
         connection.sendmail(
             from_addr=my_email,
-            to_addrs=RECIPIENT,
+            to_addrs=recipient_email,
             msg=f"Subject:Happy Birthday Dear!!!\n\n{letter_to_send}"
         )
 
@@ -41,7 +41,7 @@ for n in data_dict:
         with open(f'{random_letter}') as letter_data:
             letter = letter_data.read()
             letter = letter.replace('[NAME]', f'{n["name"]}').replace('[AGE]', f'{age}')
-            send_email(letter)
+            send_email(letter, n['email'])
 
 
 
