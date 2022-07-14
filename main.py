@@ -38,7 +38,7 @@ for n in data_dict:
         age = currentYear - n['year']
         # if birthday, pick one letter and replace placeholders
         random_letter = f'letter_templates/letter_{random.randint(1, 3)}.txt'
-        with open(f'{random_letter}') as letter_data:
+        with open(random_letter) as letter_data:
             letter = letter_data.read()
             letter = letter.replace('[NAME]', f'{n["name"]}').replace('[AGE]', f'{age}')
             send_email(letter, n['email'])
